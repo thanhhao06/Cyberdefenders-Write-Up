@@ -19,7 +19,7 @@ Thanks, [th3c0rt3x](https://cyberdefenders.org/accounts/profile/th3c0rt3x) for r
 Kiểm tra tệp nhật ký xác thực hệ thống `/var/log/auth.log`. Nhận thấy các bản ghi liên tục xuất phát từ tiến trình daemon `sshd`
 
 Như vậy dịch vụ mà kẻ tấn công khai thác để xâm nhập vào hệ thống là `ssh`
-![Pasted image 20261001135430.png](./images/Pasted%20image%2020261001135430.png)
+![Hammered Lab.png](./images/Hammered%20Lab.png)
 
 >ssh
 
@@ -33,7 +33,7 @@ Linux version 2.6.24-26-server (buildd@crested) (gcc version 4.2.4 (Ubuntu 4.2.4
 ```
 
 Phiên bản hệ điều hành được chỉ định chi tiết qua bản phát hành build là `4.2.4-1ubuntu3`
-![Pasted image 20261001135526.png](./images/Pasted%20image%2020261001135526.png)
+![Hammered Lab-1.png](./images/Hammered%20Lab-1.png)
 
 >4.2.4-1ubuntu3
 
@@ -42,7 +42,7 @@ Phiên bản hệ điều hành được chỉ định chi tiết qua bản phá
 **Yêu cầu:** Xác định tên tài khoản bị xâm phạm
 
 Quan sát các nỗ lực đăng nhập trong `auth.log`. Mặc dù kẻ tấn công thử nghiệm nhiều tên người dùng khác nhau (`cyrus`, `cyan`, `hailey`, `dannica`...), mục tiêu tài khoản hợp lệ bị brute-force và đăng nhập thành công là tài khoản `root`
-![Pasted image 20261001135725.png](./images/Pasted%20image%2020261001135725.png)
+![Hammered Lab-2.png](./images/Hammered%20Lab-2.png)
 
 >root
 
@@ -72,7 +72,7 @@ Kết quả trả về danh sách gồm 6 địa chỉ IP có số lần brute f
 - `122.226.202.12` (513 fails)
 - `61.168.227.12` (213 fails)
 
-![Pasted image 20261001130147.png](./images/Pasted%20image%2020261001130147.png)
+![Hammered Lab-3.png](./images/Hammered%20Lab-3.png)
 
 >6
 
@@ -81,7 +81,7 @@ Kết quả trả về danh sách gồm 6 địa chỉ IP có số lần brute f
 **Yêu cầu:** Xác định IP của kẻ tấn công đã đăng nhập thành công vào hệ thống nhiều lần nhất
 
 Từ kết quả thống kê các phiên đăng nhập thành công, địa chỉ IP `219.150.161.20` chiếm số lượng lớn nhất với hơn 9,200 lần thử sai và là kẻ tấn công tích cực nhất trên hệ thống
-![Pasted image 20261001130227.png](./images/Pasted%20image%2020261001130227.png)
+![Hammered Lab-4.png](./images/Hammered%20Lab-4.png)
 
 >219.150.161.20
 
@@ -97,7 +97,7 @@ wc -l www-access.log
 ```
 
 Kết quả cho ra 365 dòng, tương ứng 365 requests
-![Pasted image 20261002155900.png](./images/Pasted%20image%2020261002155900.png)
+![Hammered Lab-5.png](./images/Hammered%20Lab-5.png)
 
 >365
 
@@ -119,7 +119,7 @@ Quan sát thấy người dùng root đã thực thi 6 lệnh thêm quy tắc v�
 - `iptables -A INPUT -p tcp --dport 113 -j ACCEPT`
 
 Tổng cộng có 6 quy tắc đã được thêm vào tường lửa
-![Pasted image 20261001132143.png](./images/Pasted%20image%2020261001132143.png)
+![Hammered Lab-6.png](./images/Hammered%20Lab-6.png)
 
 >6
 
@@ -135,8 +135,8 @@ Kiểm tra `dpkg.log` vào ngày 24/04/2010, phát hiện bản ghi cài đặt 
 ```
 
 Tên công cụ là `nmap`
-![Pasted image 20261001133814.png](./images/Pasted%20image%2020261001133814.png)
-![Pasted image 20261001133831.png](./images/Pasted%20image%2020261001133831.png)
+![Hammered Lab-7.png](./images/Hammered%20Lab-7.png)
+![Hammered Lab-8.png](./images/Hammered%20Lab-8.png)
 
 >nmap
 
@@ -155,7 +155,7 @@ Apr 19 05:56:05 app-1 sshd[13218]: Accepted password for root from 219.150.161.2
 ```
 
 Định dạng thời gian theo chuẩn năm 2010 là `2010-04-19 05:56`
-![Pasted image 20261001134326.png](./images/Pasted%20image%2020261001134326.png)
+![Hammered Lab-9.png](./images/Hammered%20Lab-9.png)
 
 >2010-04-19 05:56
 
@@ -173,7 +173,7 @@ grep "WARNING" daemon.log
 - `WARNING: mysql.user contains 2 root accounts without password!`
 
 Trong đó, việc tài khoản root MySQL không có mật khẩu là cảnh báo nghiêm trọng nhất về mặt bảo mật
-![Pasted image 20261001134745.png](./images/Pasted%20image%2020261001134745.png)
+![Hammered Lab-10.png](./images/Hammered%20Lab-10.png)
 
 >mysql.user contains 2 root accounts without password!
 
@@ -192,7 +192,7 @@ Apr 26 04:43:15 app-1 useradd[20115]: new user: name=wind3str0y, UID=1004, GID=1
 ```
 
 Tên tài khoản mới được tạo là `wind3str0y`
-![Pasted image 20261001134922.png](./images/Pasted%20image%2020261001134922.png)
+![Hammered Lab-11.png](./images/Hammered%20Lab-11.png)
 
 >wind3str0y
 
@@ -211,6 +211,6 @@ Trong danh sách các User-Agent, phát hiện công cụ quét proxy chuyên d�
 ```
 
 User-Agent tương ứng là `pxyscand/2.1`
-![Pasted image 20261001135056.png](./images/Pasted%20image%2020261001135056.png)
+![Hammered Lab-12.png](./images/Hammered%20Lab-12.png)
 
 >pxyscand/2.1

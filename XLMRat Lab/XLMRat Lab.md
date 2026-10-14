@@ -26,7 +26,7 @@ Request URI: /mdm.jpg
 Full request URI: http://45.126.209.4:222/mdm.jpg
 ```
 
-![Pasted image 20260816120955.png](./images/Pasted%20image%2020260816120955.png)
+![XLMRat Lab-1.png](./images/XLMRat%20Lab-1.png)
 
 > [http://45.126.209.4:222/mdm.jpg](http://45.126.209.4:222/mdm.jpg)
 
@@ -51,7 +51,7 @@ Trong capture có ba địa chỉ IP chính:
 45.126.209.4
 ```
 
-![Pasted image 20260816120958.png](./images/Pasted%20image%2020260816120958.png)
+![XLMRat Lab-2.png](./images/XLMRat%20Lab-2.png)
 
 Hai địa chỉ bắt đầu bằng `10.x.x.x` thuộc private address space, do đó IP public cần điều tra là `45.126.209.4`.
 
@@ -72,7 +72,7 @@ descr: ReliableSite.Net LLC
 abuse-mailbox: abuse@reliablesite.net
 ```
 
-![Pasted image 20260816121005.png](./images/Pasted%20image%2020260816121005.png)
+![XLMRat Lab-3.png](./images/XLMRat%20Lab-3.png)
 
 APNIC hiện cũng ghi nhận netblock này dưới organization `ReliableSite.Net LLC`.
 
@@ -100,7 +100,7 @@ Script tự chuyển các chuỗi này thành byte array:
 ```
 
 Để phân tích `$hexString_bbb`, copy toàn bộ chuỗi vào **CyberChef** và thực hiện:
-![Pasted image 20260816121011.png](./images/Pasted%20image%2020260816121011.png)
+![XLMRat Lab-4.png](./images/XLMRat%20Lab-4.png)
 
 Kết quả SHA256 là:
 ```text
@@ -126,7 +126,7 @@ Backdoor:MSIL/AsyncRat...
 ```
 
 VirusTotal cũng hiển thị `asyncrat` trong Family labels.
-![Pasted image 20260816121015.png](./images/Pasted%20image%2020260816121015.png)
+![XLMRat Lab-5.png](./images/XLMRat%20Lab-5.png)
 
 > AsyncRat
 
@@ -141,7 +141,7 @@ Trường `Creation Time` hiển thị:
 2023-10-30 15:08:44 UTC
 ```
 
-![Pasted image 20260816121019.png](./images/Pasted%20image%2020260816121019.png)
+![XLMRat Lab-6.png](./images/XLMRat%20Lab-6.png)
 
 Đây là timestamp được lấy từ metadata/PE information của mẫu.  **PE compilation/creation timestamp có thể bị attacker chỉnh sửa**, vì vậy trong một investigation thực tế không nên xem giá trị này là bằng chứng tuyệt đối về thời điểm malware thực sự được tạo.
 
@@ -171,7 +171,7 @@ $CM = 'In###############vo##########ke' -replace '#', ''
 $EY = $MZ.$CM($null, [object[]] $VA)
 ```
 
-![Pasted image 20260816121025.png](./images/Pasted%20image%2020260816121025.png)
+![XLMRat Lab-7.png](./images/XLMRat%20Lab-7.png)
 
 Khi loại bỏ toàn bộ ký tự `#` và ghép hai phần của path:
 ```text
@@ -229,7 +229,7 @@ Tiếp theo script tạo:
 C:\Users\Public\Conted.vbs
 ```
 
-![Pasted image 20260816121036.png](./images/Pasted%20image%2020260816121036.png)
+![XLMRat Lab-8.png](./images/XLMRat%20Lab-8.png)
 
 VBScript sử dụng:
 ```vbscript

@@ -17,11 +17,11 @@ Resources: Windows Mail Artifacts: Microsoft HxStore.hxd (email) Research
 **Yêu cầu:** Xác định MD5 hash của file thực thi đáng ngờ mà người dùng đã tải xuống.
 
 Đầu tiên, mở forensic image bằng **FTK Imager** và kiểm tra thư mục `Downloads` trong profile của user. Tại đây có một file đáng chú ý tên `IMF-Info.pdf.exe`
-![Pasted image 20260815101031.png](./images/Pasted%20image%2020260815101031.png)
+![Silent Breach Lab-1.png](./images/Silent%20Breach%20Lab-1.png)
 Tên file sử dụng **double extension** `.pdf.exe`, một kỹ thuật thường được dùng để khiến executable trông giống tài liệu PDF nếu người dùng không để ý phần mở rộng thật.
 
 Tiếp theo, sử dụng **md5sum** để lấy giá trị MD5 của file
-![Pasted image 20260815101141.png](./images/Pasted%20image%2020260815101141.png)
+![Silent Breach Lab-2.png](./images/Silent%20Breach%20Lab-2.png)
 
 >336a7cf476ebc7548c93507339196abb
 
@@ -30,7 +30,7 @@ Tiếp theo, sử dụng **md5sum** để lấy giá trị MD5 của file
 **Yêu cầu:** Xác định URL nguồn đã được sử dụng để tải file `IMF-Info.pdf.exe` xuống hệ thống.
 
 Với các file được tải từ Internet trên Windows, có thể kiểm tra **Mark-of-the-Web** được lưu trong Alternate Data Stream `Zone.Identifier`. Trong FTK Imager, mở metadata đi kèm file `IMF-Info.pdf.exe` và quan sát trường `HostUrl`
-![Pasted image 20260815101145.png](./images/Pasted%20image%2020260815101145.png)
+![Silent Breach Lab-3.png](./images/Silent%20Breach%20Lab-3.png)
 Thông tin này cho thấy executable được tải trực tiếp từ một HTTP server nội bộ tại địa chỉ `192.168.16.128` và sử dụng port `8000`
 
 Ngoài ra, kết quả này cũng có thể được đối chiếu lại trong database lịch sử download của Microsoft Edge
@@ -48,10 +48,10 @@ Database lịch sử của Chromium-based browsers thường được lưu trong
 C:\Users\ethan\AppData\Local\Microsoft\Edge\User Data\Default\History
 ```
 
-![Pasted image 20260815175503.png](./images/Pasted%20image%2020260815175503.png)
+![Silent Breach Lab-4.png](./images/Silent%20Breach%20Lab-4.png)
 
 Mở file bằng **DB Browser for SQLite** và kiểm tra bảng liên quan đến download. Tại đây xuất hiện bản ghi của `IMF-Info.pdf.exe` cùng URL đã xác định ở Q2
-![Pasted image 20260815175653.png](./images/Pasted%20image%2020260815175653.png)
+![Silent Breach Lab-5.png](./images/Silent%20Breach%20Lab-5.png)
 
 >Microsoft Edge
 ## Q4: By examining Windows Mail artifacts, we found an email address mentioning three IP addresses of servers that are at risk or compromised. What are the IP addresses?
@@ -63,14 +63,14 @@ Ban đầu có thể tìm kiếm file `.eml`, tuy nhiên Windows Mail không nh�
 C:\Users\ethan\AppData\Local\Packages\microsoft.windowscommunicationsapps_8wekyb3d8bbwe\LocalState\HxStore.hxd
 ```
 
-![Pasted image 20260815101154.png](./images/Pasted%20image%2020260815101154.png)
+![Silent Breach Lab-6.png](./images/Silent%20Breach%20Lab-6.png)
 Export `HxStore.hxd` từ forensic image để phân tích. Đây là file binary nhưng vẫn chứa nhiều chuỗi có thể đọc được, bao gồm nội dung và metadata của email.
 
 Có thể mở file bằng **HxD** hoặc sử dụng `strings`, sau đó tìm các từ khóa liên quan như `risk`, `compromised`, `IP` hoặc trực tiếp tìm pattern IPv4
-![Pasted image 20260815101157.png](./images/Pasted%20image%2020260815101157.png)
+![Silent Breach Lab-7.png](./images/Silent%20Breach%20Lab-7.png)
 
 Từ nội dung email, xác định được ba địa chỉ IP được nhắc đến
-![Pasted image 20260815101200.png](./images/Pasted%20image%2020260815101200.png)
+![Silent Breach Lab-8.png](./images/Silent%20Breach%20Lab-8.png)
 
 >145.67.29.88, 212.33.10.112, 192.168.16.128
 
@@ -83,12 +83,12 @@ Trước tiên, kiểm tra hành vi của mẫu `IMF-Info.pdf.exe` trên các ng
 Gz3m6mG3j2TyAqF2Zx4v.ps1
 ```
 
-![Pasted image 20260815101204.png](./images/Pasted%20image%2020260815101204.png)
+![Silent Breach Lab-9.png](./images/Silent%20Breach%20Lab-9.png)
 
-![Pasted image 20260815101209.png](./images/Pasted%20image%2020260815101209.png)
+![Silent Breach Lab-10.png](./images/Silent%20Breach%20Lab-10.png)
 
 Tiếp tục phân tích executable bằng `strings` và tìm các chuỗi liên quan đến PowerShell hoặc tên script. Từ đó có thể tìm thấy một đoạn dữ liệu Base64 bị obfuscate
-![Pasted image 20260815101213.png](./images/Pasted%20image%2020260815101213.png)
+![Silent Breach Lab-11.png](./images/Silent%20Breach%20Lab-11.png)
 Điểm đáng chú ý là script sử dụng `[Array]::Reverse(...)`, cho thấy dữ liệu cần được **đảo ngược trước khi decode Base64**. Vì vậy có thể đưa chuỗi vào CyberChef với thứ tự xử lý:
 ```text
 Reverse
@@ -96,7 +96,7 @@ From Base64
 ```
 
 Sau khi deobfuscate, script lộ ra các tham số mã hóa, trong đó password được hardcode là `Imf!nfo#2025Sec$`. Script sử dụng password này cùng salt cố định và PBKDF2 để sinh key/IV cho AES
-![Pasted image 20260815101217.png](./images/Pasted%20image%2020260815101217.png)
+![Silent Breach Lab-12.png](./images/Silent%20Breach%20Lab-12.png)
 
 >Imf!nfo#2025Sec$
 
@@ -128,10 +128,10 @@ Padding    : PKCS7
 ```
 
 Trước tiên cần tìm KEY và IV và vì đã có kích thước của KEY và IV nên kích thước chuỗi cần tìm là 48 byte tương ứng với 384 bit
-![Pasted image 20260815181558.png](./images/Pasted%20image%2020260815181558.png)
+![Silent Breach Lab-13.png](./images/Silent%20Breach%20Lab-13.png)
 
 Sau khi chạy script, hai file PDF gốc sẽ được khôi phục. Mở `IMF-Mission.pdf` để đọc **secret string** được yêu cầu bởi challenge
-![Pasted image 20260815180659.png](./images/Pasted%20image%2020260815180659.png)
+![Silent Breach Lab-14.png](./images/Silent%20Breach%20Lab-14.png)
 
 Ngoài ra có thể dùng một PowerShell script để thực hiện quá trình giải mã với cùng password, salt và PBKDF2 parameters:
 ```powershell

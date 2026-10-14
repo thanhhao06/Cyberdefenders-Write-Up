@@ -15,7 +15,7 @@ While working as a SOC analyst, you may encounter alerts from the enterprise End
 **Yêu cầu:** Xác định giá trị băm SHA256 của tệp DOC độc hại
 
 Sử dụng lệnh sha256sum tính toán mã băm cho tệp tài liệu document.doc
-![Pasted image 20261008174801.png](./images/Pasted%20image%2020261008174801.png)
+![Obfuscated Lab-1.png](./images/Obfuscated%20Lab-1.png)
 
 >ff2c8cadaa0fd8da6138cce6fce37e001f53a5d9ceccd67945b15ae273f4d751
 
@@ -24,7 +24,7 @@ Sử dụng lệnh sha256sum tính toán mã băm cho tệp tài liệu document
 **Yêu cầu:** Tìm số thứ tự của luồng stream nhỏ nhất có chứa macro trong tài liệu
 
 Sử dụng oledump phân tích cấu trúc các stream trong tệp Word độc hại để phát hiện mã macro
-![Pasted image 20261008175102.png](./images/Pasted%20image%2020261008175102.png)
+![Obfuscated Lab-2.png](./images/Obfuscated%20Lab-2.png)
 
 Chữ cái M hoặc m đánh dấu luồng chứa mã macro và luồng có chỉ số nhỏ nhất là 8
 
@@ -35,7 +35,7 @@ Chữ cái M hoặc m đánh dấu luồng chứa mã macro và luồng có ch�
 **Yêu cầu:** Xác định khóa giải mã được dùng cho đoạn mã bị làm rối
 
 Trích xuất và giải nén mã macro VBA từ stream 8 bằng tham số --vbadecompress của oledump.py tôi ghi nhận chuỗi khóa giải mã được truyền vào lệnh thực thi
-![Pasted image 20261008175237.png](./images/Pasted%20image%2020261008175237.png)
+![Obfuscated Lab-3.png](./images/Obfuscated%20Lab-3.png)
 
 >EzZETcSXyKAdF_e5I2i1
 
@@ -44,7 +44,7 @@ Trích xuất và giải nén mã macro VBA từ stream 8 bằng tham số --vba
 **Yêu cầu:** Xác định tên của tệp được tạo ra trên hệ thống
 
 Đọc luồng mã VBA xác định đường dẫn tệp script được malware ghi vào thư mục %appdata%\Microsoft\Windows
-![Pasted image 20261008175333.png](./images/Pasted%20image%2020261008175333.png)
+![Obfuscated Lab-4.png](./images/Obfuscated%20Lab-4.png)
 
 >maintools.js
 
@@ -53,7 +53,7 @@ Trích xuất và giải nén mã macro VBA từ stream 8 bằng tham số --vba
 **Yêu cầu:** Xác định ngôn ngữ lập trình của tệp script này
 
 Tệp rơi xuống mang đuôi mở rộng .js và được WScript.Shell gọi thực thi trực tiếp trên hệ thống Windows thông qua engine JScript
-![Pasted image 20261008175550.png](./images/Pasted%20image%2020261008175550.png)
+![Obfuscated Lab-5.png](./images/Obfuscated%20Lab-5.png)
 
 >JScript
 

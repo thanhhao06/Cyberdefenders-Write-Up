@@ -17,7 +17,7 @@ As the threat intelligence analyst, it's your responsibility to examine this pos
 **Yêu cầu:** Xác định có bao nhiêu phiên bản 3CX Desktop App trên Windows bị xác định là độc hại.
 
 Đầu tiên, tra cứu các báo cáo Threat Intelligence liên quan đến sự cố [3CX Supply Chain Attack](https://www.3cx.com/blog/news/desktopapp-security-alert/) để xác định những phiên bản Windows đã bị trojan hóa.
-![Pasted image 20260816100335.png](./images/Pasted%20image%2020260816100335.png)
+![3CX Supply Chain Lab-1.png](./images/3CX%20Supply%20Chain%20Lab-1.png)
 
 Trong quá trình điều tra, hai phiên bản 3CX Desktop App dành cho Windows thường được xác định có liên quan đến chiến dịch là:
 ```
@@ -39,7 +39,7 @@ Như vậy, tổng cộng có **hai phiên bản Windows** bị xác định tro
 Để xác định thời gian tạo của mẫu malware, lấy hash của file `.msi` và tra cứu trên **VirusTotal**.
 
 Trong tab **Details**, kéo xuống phần **History** để kiểm tra các mốc thời gian liên quan đến mẫu.
-![Pasted image 20260816093424.png](./images/Pasted%20image%2020260816093424.png)
+![3CX Supply Chain Lab-2.png](./images/3CX%20Supply%20Chain%20Lab-2.png)
 Tại trường **Creation Time**, VirusTotal ghi nhận thời điểm tạo của file là:
 ```
 2023-03-13 06:33:26 UTC
@@ -61,7 +61,7 @@ d3dcompiler_47.dll
 ffmpeg.dll
 ```
 
-![Pasted image 20260816093428.png](./images/Pasted%20image%2020260816093428.png)
+![3CX Supply Chain Lab-3.png](./images/3CX%20Supply%20Chain%20Lab-3.png)
 
 Hai file này đóng vai trò quan trọng trong infection chain của chiến dịch.
 
@@ -80,7 +80,7 @@ Sau khi được load, `ffmpeg.dll` tiếp tục đọc dữ liệu được nh�
 Từ infection chain ở câu trước, có thể thấy `3CXDesktopApp.exe` là một executable hợp lệ nhưng lại load `ffmpeg.dll` độc hại trong quá trình khởi chạy.
 
 Hành vi này là đặc trưng của kỹ thuật **DLL Side-Loading**.
-![Pasted image 20260816101228.png](./images/Pasted%20image%2020260816101228.png)
+![3CX Supply Chain Lab-4.png](./images/3CX%20Supply%20Chain%20Lab-4.png)
 
 Thay vì trực tiếp khởi chạy một executable độc hại, attacker đặt DLL đã bị chỉnh sửa vào vị trí mà một chương trình hợp lệ sẽ tìm kiếm và load. Khi người dùng chạy ứng dụng, mã độc được thực thi bên trong context của tiến trình đáng tin cậy.
 
@@ -91,7 +91,7 @@ Thay vì trực tiếp khởi chạy một executable độc hại, attacker đ�
 **Yêu cầu:** Xác định threat category của hai DLL độc hại.
 
 Tiếp tục tra cứu các mẫu DLL trên **VirusTotal** và quan sát phần **Threat categories**
-![Pasted image 20260816093437.png](./images/Pasted%20image%2020260816093437.png)
+![3CX Supply Chain Lab-5.png](./images/3CX%20Supply%20Chain%20Lab-5.png)
 
 VirusTotal hiển thị một số nhãn phân loại như:
 ```
@@ -113,7 +113,7 @@ Vì vậy threat category cần xác định là **Trojan**.
 Trong quá trình dynamic analysis, tiếp tục kiểm tra phần **Behavior** của mẫu malware và quan sát MITRE ATT&CK mapping.
 
 Kết quả cho thấy malware thực hiện kỹ thuật: **Virtualization/Sandbox Evasion**
-![Pasted image 20260816093441.png](./images/Pasted%20image%2020260816093441.png)
+![3CX Supply Chain Lab-6.png](./images/3CX%20Supply%20Chain%20Lab-6.png)
 
 Đây là một kỹ thuật anti-analysis thường được malware sử dụng để kiểm tra xem nó có đang chạy trong máy ảo hoặc sandbox của analyst hay không.
 
@@ -128,7 +128,7 @@ Nếu phát hiện môi trường phân tích, malware có thể thay đổi hà
 Lấy hash của `ffmpeg.dll` và tiến hành phân tích riêng mẫu này trên VirusTotal.
 
 Trong phần **Capabilities → Anti-Analysis**, kết quả cho thấy DLL chứa các chuỗi được sử dụng để kiểm tra môi trường máy ảo
-![Pasted image 20260816093445.png](./images/Pasted%20image%2020260816093445.png)
+![3CX Supply Chain Lab-7.png](./images/3CX%20Supply%20Chain%20Lab-7.png)
 
 VirusTotal ghi nhận:
 ```
@@ -147,7 +147,7 @@ Mục đích của kỹ thuật này là xác định liệu malware có đang c
 **Yêu cầu:** Xác định thuật toán mã hóa được `ffmpeg.dll` sử dụng.
 
 Tiếp tục phân tích capability của `ffmpeg.dll`, đặc biệt là phần liên quan đến **Cryptography**.
-![Pasted image 20260816093449.png](./images/Pasted%20image%2020260816093449.png)
+![3CX Supply Chain Lab-8.png](./images/3CX%20Supply%20Chain%20Lab-8.png)
 
 Trong kết quả phân tích có thể thấy nhiều dấu hiệu liên quan trực tiếp đến RC4:
 ```
@@ -181,7 +181,7 @@ Attribution của một chiến dịch APT không nên chỉ dựa vào một IO
 Tra cứu thông tin về **3CX Backdoor** trên [Malpedia](https://malpedia.caad.fkie.fraunhofer.de/details/win.3cx_backdoor) cho thấy chiến dịch được liên kết với các threat actor có nguồn gốc từ Triều Tiên.
 
 Trong nguồn tra cứu được sử dụng cho challenge, phần thông tin của **3CX Backdoor** xác định actor liên quan là:
-![Pasted image 20260816095606.png](./images/Pasted%20image%2020260816095606.png)
+![3CX Supply Chain Lab-9.png](./images/3CX%20Supply%20Chain%20Lab-9.png)
 
 **Lazarus Group** là tên gọi phổ biến được sử dụng để mô tả một hệ sinh thái các hoạt động cyber có liên hệ với Triều Tiên. Trong các báo cáo khác, những cluster cụ thể liên quan tới sự cố 3CX còn được theo dõi bằng các tên như **LABYRINTH CHOLLIMA** hoặc `UNC4736`
 

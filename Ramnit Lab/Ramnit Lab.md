@@ -31,7 +31,7 @@ Trong danh sách process xuất hiện một executable đáng chú ý:
 ChromeSetup.exe
 ```
 
-![Pasted image 20260816115320.png](./images/Pasted%20image%2020260816115320.png)
+![Ramnit Lab-1.png](./images/Ramnit%20Lab-1.png)
 
 Process này có PID:
 ```
@@ -56,7 +56,7 @@ Sau đó tìm PID hoặc tên process:
 ChromeSetup.exe
 ```
 
-![Pasted image 20260816115324.png](./images/Pasted%20image%2020260816115324.png)
+![Ramnit Lab-2.png](./images/Ramnit%20Lab-2.png)
 
 Kết quả cho thấy process được thực thi từ:
 ```
@@ -88,7 +88,7 @@ và process:
 ChromeSetup.exe
 ```
 
-![Pasted image 20260816115328.png](./images/Pasted%20image%2020260816115328.png)
+![Ramnit Lab-3.png](./images/Ramnit%20Lab-3.png)
 
 Kết quả cho thấy process `ChromeSetup.exe` tạo connection từ máy nạn nhân:
 ```
@@ -113,7 +113,7 @@ cho thấy process đã cố gắng khởi tạo TCP connection tới remote hos
 **Yêu cầu:** Xác định thành phố được geolocation database liên kết với địa chỉ IP `58.64.204.181`.
 
 Sau khi tìm được remote IP ở câu trước, tiến hành tra cứu thông tin IP bằng whois.
-![Pasted image 20260816115335.png](./images/Pasted%20image%2020260816115335.png)
+![Ramnit Lab-4.png](./images/Ramnit%20Lab-4.png)
 Từ chữ viết tắt mình có thể biết được đây chính là Hong Kong 
 
 >Hong Kong
@@ -129,7 +129,7 @@ Có thể sử dụng plugin `windows.dumpfiles`:
 python3 vol.py -f ~/Downloads/ranmit/memory.dmp -o ~/Documents windows.dumpfiles  --pid 4628
 ```
 
-![Pasted image 20260816115340.png](./images/Pasted%20image%2020260816115340.png)
+![Ramnit Lab-5.png](./images/Ramnit%20Lab-5.png)
 
 Volatility tìm được `ChromeSetup.exe` trong memory và tạo ra file dump có tên dạng:
 ```
@@ -137,7 +137,7 @@ file.0xca82b85325a0.0xca82b7e06c80.ImageSectionObject.ChromeSetup.exe.img
 ```
 
 Sau khi có file, sử dụng `sha1sum`:
-![Pasted image 20260816115349.png](./images/Pasted%20image%2020260816115349.png)
+![Ramnit Lab-6.png](./images/Ramnit%20Lab-6.png)
 
 
 >280c9d36039f9432433893dee6126d72b9112ad2
@@ -153,7 +153,7 @@ Chuyển sang:
 Details → History
 ```
 
-![Pasted image 20260816115406.png](./images/Pasted%20image%2020260816115406.png)
+![Ramnit Lab-7.png](./images/Ramnit%20Lab-7.png)
 
 Tại trường **Creation Time**, VirusTotal hiển thị:
 ```
@@ -177,7 +177,7 @@ Contacted Domains
 ```
 có thể quan sát các domain mà mẫu đã liên lạc trong quá trình phân tích.
 
-![Pasted image 20260816115411.png](./images/Pasted%20image%2020260816115411.png)
+![Ramnit Lab-8.png](./images/Ramnit%20Lab-8.png)
 
 Hai domain đáng chú ý là:
 ```

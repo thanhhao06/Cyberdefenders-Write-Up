@@ -22,7 +22,7 @@ Statistics → Conversations → IPv4
 ```
 để quan sát những địa chỉ IP có lượng traffic đáng chú ý
 
-![Pasted image 20260816093913.png](./images/Pasted%20image%2020260816093913.png)
+![DanaBot Lab-1.png](./images/DanaBot%20Lab-1.png)
 Trong kết quả, địa chỉ `10.2.14.101` xuất hiện trong hầu hết các connection nên có thể xác định đây là máy nạn nhân trong network.
 
 Tiếp theo, filter các packet có destination là máy này:
@@ -35,7 +35,7 @@ Tiếp theo, filter các packet có destination là máy này:
 ip.dst == 10.2.14.101
 ```
 
-![Pasted image 20260816093916.png](./images/Pasted%20image%2020260816093916.png)
+![DanaBot Lab-2.png](./images/DanaBot%20Lab-2.png)
 
 Ngay ở những packet đầu tiên có thể thấy địa chỉ:
 ```
@@ -60,7 +60,7 @@ Từ kết quả ở câu trước, tiếp tục phân tích HTTP traffic bằng
 http
 ```
 
-![Pasted image 20260816093920.png](./images/Pasted%20image%2020260816093920.png)
+![DanaBot Lab-3.png](./images/DanaBot%20Lab-3.png)
 
 Một request đáng chú ý xuất hiện ngay đầu traffic:
 ```
@@ -72,7 +72,7 @@ Request được gửi từ máy nạn nhân `10.2.14.101` tới server `62.173.
 Tuy nhiên, `login.php` chỉ là tên resource phía server và chưa chắc là tên thực tế của file được trả về.
 
 Để kiểm tra, chọn packet HTTP response tương ứng và sử dụng **Follow HTTP Stream**.
-![Pasted image 20260816093926.png](./images/Pasted%20image%2020260816093926.png)
+![DanaBot Lab-4.png](./images/DanaBot%20Lab-4.png)
 
 Trong HTTP response header có trường:
 ```
@@ -100,7 +100,7 @@ File → Export Objects → HTTP
 Do resource trên server có tên `/login.php`, file được export có thể vẫn mang tên `login.php`, nhưng nội dung chính là JavaScript `allegato_708.js` đã xác định ở câu trước.
 
 Sau khi export, sử dụng `sha256sum` để tính SHA-256:
-![Pasted image 20260816093930.png](./images/Pasted%20image%2020260816093930.png)
+![DanaBot Lab-5.png](./images/DanaBot%20Lab-5.png)
 
 >847b4ad90b1daba2d9117a8e05776f3f902dda593fb1252289538acf476c4268
 
@@ -115,7 +115,7 @@ File JavaScript đã bị **obfuscate**, khiến source code khó đọc trực 
 WScript
 ```
 
-![Pasted image 20260816093933.png](./images/Pasted%20image%2020260816093933.png)
+![DanaBot Lab-6.png](./images/DanaBot%20Lab-6.png)
 
 `WScript` liên quan đến **Windows Script Host**, thành phần tích hợp sẵn của Windows có khả năng thực thi các script như `.js` và `.vbs`
 
@@ -133,7 +133,7 @@ http
 ```
 và kiểm tra các HTTP GET request tiếp theo.
 
-![Pasted image 20260816093937.png](./images/Pasted%20image%2020260816093937.png)
+![DanaBot Lab-7.png](./images/DanaBot%20Lab-7.png)
 
 Một request đáng chú ý xuất hiện:
 ```
@@ -162,7 +162,7 @@ resources.dll
 ```
 
 Sau đó tính MD5 hash :
-![Pasted image 20260816093941.png](./images/Pasted%20image%2020260816093941.png)
+![DanaBot Lab-8.png](./images/DanaBot%20Lab-8.png)
 
 >e758e07113016aca55d9eda2b0ffeebe
 

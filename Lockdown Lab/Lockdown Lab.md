@@ -23,7 +23,7 @@ As the forensic examiner, you have three critical artefacts in hand: a PCAP capt
 Statistics → Conversations → IPv4
 ```
 
-![Pasted image 20260816110655.png](./images/Pasted%20image%2020260816110655.png)
+![Lockdown Lab-1.png](./images/Lockdown%20Lab-1.png)
 
 Trong danh sách có thể thấy connection giữa:
 ```
@@ -52,7 +52,7 @@ port scan
 ```
 
 có thể xác định technique: **Network Service Discovery**
-![Pasted image 20260816110659.png](./images/Pasted%20image%2020260816110659.png)
+![Lockdown Lab-2.png](./images/Lockdown%20Lab-2.png)
 
 Technique này mô tả hành vi attacker thu thập danh sách các service đang chạy trên remote host hoặc network infrastructure để tìm những mục tiêu có khả năng bị khai thác.
 
@@ -72,7 +72,7 @@ Sau đó tìm các packet có operation:
 Tree Connect Request
 ```
 
-![Pasted image 20260816110702.png](./images/Pasted%20image%2020260816110702.png)
+![Lockdown Lab-3.png](./images/Lockdown%20Lab-3.png)
 
 Trong các request có thể quan sát hai UNC path:
 ```
@@ -106,7 +106,7 @@ Trong traffic xuất hiện một file đặc biệt đáng chú ý:
 shell.aspx
 ```
 
-![Pasted image 20260816110706.png](./images/Pasted%20image%2020260816110706.png)
+![Lockdown Lab-4.png](./images/Lockdown%20Lab-4.png)
 
 Packet Info hiển thị:
 ```
@@ -137,7 +137,7 @@ Tiếp tục filter TCP traffic liên quan tới attacker:
 ip.src == 10.0.2.4 && tcp
 ```
 
-![Pasted image 20260816110709.png](./images/Pasted%20image%2020260816110709.png)
+![Lockdown Lab-5.png](./images/Lockdown%20Lab-5.png)
 
 Có thể thấy một lượng lớn packet từ:
 ```
@@ -165,7 +165,7 @@ Có thể sử dụng plugin:
 python2 vol.py -f memdump.mem --profile=Win10x64_17134 kdbgscan
 ```
 
-![Pasted image 20260816110713.png](./images/Pasted%20image%2020260816110713.png)
+![Lockdown Lab-6.png](./images/Lockdown%20Lab-6.png)
 
 Trong kết quả `kdbgscan` có thể thấy:
 ```
@@ -197,7 +197,7 @@ và filter:
 grep "updatenow.exe"
 ```
 
-![Pasted image 20260816110717.png](./images/Pasted%20image%2020260816110717.png)
+![Lockdown Lab-7.png](./images/Lockdown%20Lab-7.png)
 
 Kết quả cho thấy process:
 ```
@@ -227,7 +227,7 @@ Nếu mapping chi tiết theo MITRE ATT&CK, hành vi sử dụng Startup Folder 
 T1547.001 – Registry Run Keys / Startup Folder
 ```
 
-![Pasted image 20260816111923.png](./images/Pasted%20image%2020260816111923.png)
+![Lockdown Lab-8.png](./images/Lockdown%20Lab-8.png)
 
 >C:\ProgramData\Microsoft\Windows\Start Menu\Programs\Startup\updatenow.exe, T1547
 
@@ -243,7 +243,7 @@ w3wp.exe       PID 4332
 updatenow.exe  PID 900
 ```
 
-![Pasted image 20260816110720.png](./images/Pasted%20image%2020260816110720.png)
+![Lockdown Lab-9.png](./images/Lockdown%20Lab-9.png)
 
 Điểm quan trọng là `updatenow.exe` có **PPID 4332**, trùng với PID của:
 ```
@@ -264,7 +264,7 @@ Trong bối cảnh này, việc IIS Worker Process spawn một executable lạ t
 **Yêu cầu:** Xác định packer được sử dụng để đóng gói `updatenow.exe`.
 
 Tiến hành static analysis mẫu malware bằng **Detect It Easy (DIE)**.
-![Pasted image 20260816110725.png](./images/Pasted%20image%2020260816110725.png)
+![Lockdown Lab-10.png](./images/Lockdown%20Lab-10.png)
 
 DIE nhận diện:
 ```
@@ -293,7 +293,7 @@ kiểm tra phần:
 Contacted Domains
 ```
 
-![Pasted image 20260816110729.png](./images/Pasted%20image%2020260816110729.png)
+![Lockdown Lab-11.png](./images/Lockdown%20Lab-11.png)
 
 Một domain nổi bật là:
 ```
@@ -325,7 +325,7 @@ Score: 100/100
 Threat: Family.AGENTTESLA
 ```
 
-![Pasted image 20260816110733.png](./images/Pasted%20image%2020260816110733.png)
+![Lockdown Lab-12.png](./images/Lockdown%20Lab-12.png)
 
 Tên family được xác định trực tiếp là:
 ```

@@ -18,7 +18,7 @@ You are an investigator assigned to assist Drumbo, a company that recently fell 
 
 Quan sát địa chỉ email cho thấy attacker sử dụng một domain có hình thức rất giống với domain thật của công ty. Đây là kỹ thuật **typosquatting**, nhằm khiến nạn nhân khó nhận ra sự khác biệt.
 
-![Pasted image 20260815100741.png](./images/Pasted%20image%2020260815100741.png)
+![BRabbit Lab-1.png](./images/BRabbit%20Lab-1.png)
 
 > theceojamessmith@Drurnbo.com
 
@@ -27,7 +27,7 @@ Quan sát địa chỉ email cho thấy attacker sử dụng một domain có h�
 **Yêu cầu:** Xác định họ ransomware được sử dụng trong cuộc tấn công.
 
 Dựa trên kết quả phân tích mẫu malware và các dấu hiệu nhận diện, ransomware thuộc họ **Bad Rabbit**.
-![Pasted image 20260815100747.png](./images/Pasted%20image%2020260815100747.png)
+![BRabbit Lab-2.png](./images/BRabbit%20Lab-2.png)
 
 
 >BadRabbit
@@ -37,15 +37,15 @@ Dựa trên kết quả phân tích mẫu malware và các dấu hiệu nhận d
 **Yêu cầu:** Xác định file đầu tiên được ransomware thả xuống hệ thống sau khi thực thi.
 
 Trước tiên, phân tích email phishing để tìm file đính kèm độc hại. Trong email, file được xác định là: **Urgent Contract Action.pdf.exe**
-![Pasted image 20260815100757.png](./images/Pasted%20image%2020260815100757.png)
+![BRabbit Lab-3.png](./images/BRabbit%20Lab-3.png)
 
 File thực chất là một executable nhưng được đặt tên với phần mở rộng `.pdf.exe` nhằm đánh lừa người dùng nghĩ rằng đây là tài liệu PDF.
 
 Tiếp theo, decode phần dữ liệu Base64 trong email để khôi phục file
-![Pasted image 20260815100802.png](./images/Pasted%20image%2020260815100802.png)
+![BRabbit Lab-4.png](./images/BRabbit%20Lab-4.png)
 
 Sau khi có mẫu malware, tiến hành phân tích bằng **VirusTotal**. Trong phần thông tin về các file được malware tạo ra hoặc drop xuống hệ thống, có thể xác định file đầu tiên là `infpub.dat`
-![Pasted image 20260815100808.png](./images/Pasted%20image%2020260815100808.png)
+![BRabbit Lab-5.png](./images/BRabbit%20Lab-5.png)
 
 >infpub.dat
 
@@ -54,10 +54,10 @@ Sau khi có mẫu malware, tiến hành phân tích bằng **VirusTotal**. Trong
 **Yêu cầu:** Tìm username của một người được hardcode bên trong file `infpub.dat`.
 
 Trước tiên, phân tích mẫu `app.bin` để xác định tiến trình và các module được malware sử dụng. Trong quá trình thực thi có thể thấy `rundll32.exe` được sử dụng để load payload.
-![Pasted image 20260815100813.png](./images/Pasted%20image%2020260815100813.png)
+![BRabbit Lab-6.png](./images/BRabbit%20Lab-6.png)
 
 Tiếp tục kiểm tra phần **Modules** để tìm file `infpub.dat` đã được ransomware drop xuống trước đó.
-![Pasted image 20260815100818.png](./images/Pasted%20image%2020260815100818.png)
+![BRabbit Lab-7.png](./images/BRabbit%20Lab-7.png)
 
 Sau đó tải `infpub.dat` về để thực hiện phân tích tĩnh
 ![image](https://hackmd.io/_uploads/rkFf0MCRge.png)
@@ -68,7 +68,7 @@ strings -el infpub.dat
 ```
 
 Từ kết quả thu được, có thể tìm thấy username gồm bốn ký tự
-![Pasted image 20260815100826.png](./images/Pasted%20image%2020260815100826.png)
+![BRabbit Lab-8.png](./images/BRabbit%20Lab-8.png)
 
 >alex
 
@@ -77,13 +77,13 @@ Từ kết quả thu được, có thể tìm thấy username gồm bốn ký t�
 **Yêu cầu:** Xác định MITRE ATT&CK Sub-Technique mô tả việc malware sử dụng giao thức web để gửi và nhận dữ liệu với C2 server.
 
 Upload và tra cứu mẫu `infpub.dat` lên Any.run để phân tích malware, sau đó kiểm tra phần mapping **MITRE ATT&CK**
-![Pasted image 20260815100831.png](./images/Pasted%20image%2020260815100831.png)
+![BRabbit Lab-9.png](./images/BRabbit%20Lab-9.png)
 
 Theo gợi ý của đề bài, cần tìm kỹ thuật liên quan đến việc sử dụng **web protocols** cho hoạt động Command and Control.
-![Pasted image 20260815100837.png](./images/Pasted%20image%2020260815100837.png)
+![BRabbit Lab-10.png](./images/BRabbit%20Lab-10.png)
 
 Kết quả tương ứng với: **Application Layer Protocol: Web Protocols**
-![Pasted image 20260815100843.png](./images/Pasted%20image%2020260815100843.png)
+![BRabbit Lab-11.png](./images/BRabbit%20Lab-11.png)
 
 > T1071.001
 
@@ -94,10 +94,10 @@ Kết quả tương ứng với: **Application Layer Protocol: Web Protocols**
 Trong trường hợp này, thông tin persistence không xuất hiện rõ trong phân tích `infpub.dat`, vì vậy cần quay lại phân tích mẫu `app.bin`
 
 Trong phần **Persistence**, malware tạo scheduled task nhằm đảm bảo payload tiếp tục được thực thi trên hệ thống.
-![Pasted image 20260815100848.png](./images/Pasted%20image%2020260815100848.png)
+![BRabbit Lab-12.png](./images/BRabbit%20Lab-12.png)
 
 Sub-Technique tương ứng là: **Scheduled Task/Job: Scheduled Task**
-![Pasted image 20260815100853.png](./images/Pasted%20image%2020260815100853.png)
+![BRabbit Lab-13.png](./images/BRabbit%20Lab-13.png)
 
 >T1053.005
 
@@ -106,13 +106,13 @@ Sub-Technique tương ứng là: **Scheduled Task/Job: Scheduled Task**
 **Yêu cầu:** Xác định tên hai scheduled task được ransomware tạo trong quá trình thực thi.
 
 Do scheduled task liên quan trực tiếp đến việc thực thi payload, kiểm tra phần **Execution** trong kết quả phân tích malware.
-![Pasted image 20260815100859.png](./images/Pasted%20image%2020260815100859.png)
+![BRabbit Lab-14.png](./images/BRabbit%20Lab-14.png)
 
 Task đầu tiên được xác định là
-![Pasted image 20260815100903.png](./images/Pasted%20image%2020260815100903.png)
+![BRabbit Lab-15.png](./images/BRabbit%20Lab-15.png)
 
 Task thứ hai là
-![Pasted image 20260815100908.png](./images/Pasted%20image%2020260815100908.png)
+![BRabbit Lab-16.png](./images/BRabbit%20Lab-16.png)
 Đây đều là tên các con rồng trong _Game of Thrones_
 
 >rhaegal, drogon
@@ -124,7 +124,7 @@ Task thứ hai là
 Tiến hành chạy `dispci.exe` trong môi trường sandbox để quan sát hành vi của chương trình.
 
 Khi thực thi, chương trình hiển thị thông báo yêu cầu người dùng tắt các giải pháp bảo mật trên hệ thống
-![Pasted image 20260815100913.png](./images/Pasted%20image%2020260815100913.png)
+![BRabbit Lab-17.png](./images/BRabbit%20Lab-17.png)
 Thông báo này là một dấu hiệu rõ ràng cho thấy chương trình đang cố gắng khiến người dùng vô hiệu hóa các cơ chế phòng vệ, từ đó tạo điều kiện cho payload độc hại thực thi mà không bị phát hiện hoặc ngăn chặn
 
 >Disable your anti-virus and anti-malware programs
@@ -142,7 +142,7 @@ C:\Windows\cscc.dat
 Tiếp tục tra cứu các báo cáo Threat Intelligence về [Bad Rabbit](https://www.varonis.com/blog/bad-rabbit-ransomware) cho thấy malware không tự xây dựng toàn bộ cơ chế mã hóa ổ đĩa mà tận dụng **DiskCryptor**, một phần mềm mã hóa ổ đĩa mã nguồn mở, một số bài báo sẽ không nói về phần mềm này
 
 Trong đó, `cscc.dat` thực chất là driver hợp lệ `dcrypt.sys` của DiskCryptor được đổi tên. Thành phần `dispci.exe` sẽ giao tiếp với driver này thông qua device `\\.\dcrypt`, gửi các IOCTL command để bắt đầu quá trình mã hóa ổ đĩa. Đồng thời, `dispci.exe` chứa chức năng thay thế MBR bằng bootloader của ransomware
-![Pasted image 20260815173200.png](./images/Pasted%20image%2020260815173200.png)
+![BRabbit Lab-18.png](./images/BRabbit%20Lab-18.png)
 
 >DiskCryptor
 ## Q10: Attribution is key to understanding the threat landscape. The ransomware was tied to a known attack group through its tactics, techniques, and procedures (TTPs). What is the name of the threat actor responsible for this ransomware campaign?
@@ -156,14 +156,14 @@ MITRE ATT&CK định danh Bad Rabbit là:
 S0606 – Bad Rabbit
 ```
 
-![Pasted image 20260815174141.png](./images/Pasted%20image%2020260815174141.png)
+![BRabbit Lab-19.png](./images/BRabbit%20Lab-19.png)
 
 Trong phần **Groups That Use This Software**, Bad Rabbit được liên kết với:
 ```
 G0034 – Sandworm Team
 ```
 
-![Pasted image 20260815174108.png](./images/Pasted%20image%2020260815174108.png)
+![BRabbit Lab-20.png](./images/BRabbit%20Lab-20.png)
 MITRE cũng liệt kê **TeleBots** là một trong các tên liên quan đến Sandworm Team
 
 >Sandworm
@@ -173,7 +173,7 @@ MITRE cũng liệt kê **TeleBots** là một trong các tên liên quan đến 
 
 Dựa vào các từ khóa quan trọng trong câu hỏi như **firmware**, **corrupt** và **prevent booting**, tiến hành tra cứu trên MITRE ATT&CK
 MITRE ATT&CK cũng liệt kê **Bad Rabbit (S0606)** là một procedure example của T1495, do malware cài đặt bootloader đã bị chỉnh sửa khiến hệ thống không thể khởi động bình thường
-![Pasted image 20260815100920.png](./images/Pasted%20image%2020260815100920.png)
+![BRabbit Lab-21.png](./images/BRabbit%20Lab-21.png)
 Vì vậy technique phù hợp là **Firmware Corruption**
 
 >T1495

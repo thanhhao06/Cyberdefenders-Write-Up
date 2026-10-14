@@ -15,7 +15,7 @@ We're currently in the midst of a murder investigation, and we've obtained the v
 **Yêu cầu:** Xác định mã băm SHA256 của ứng dụng giao dịch chứng khoán/trading mà nạn nhân thường sử dụng.
 
 Để trích xuất thông tin về các ứng dụng đã cài đặt trên thiết bị Android, chúng ta cần phân tích cơ sở dữ liệu `gass.db` thông qua module `installedappsGass` trên công cụ ALEAPP. Lọc danh sách các ứng dụng được cài đặt bằng từ khóa "trade", ta tìm thấy một package có tên `com.ticno.olymptrade`. Bảng dữ liệu này cũng cung cấp sẵn mã băm định danh SHA-256 của ứng dụng
-![Pasted image 20260908222612.png](./images/Pasted%20image%2020260908222612.png)
+![The Crime Lab.png](./images/The%20Crime%20Lab.png)
 
 >4f168a772350f283a1c49e78c1548d7c2c6c05106d8b9feb825fdc3466e9df3c
 
@@ -24,7 +24,7 @@ We're currently in the midst of a murder investigation, and we've obtained the v
 **Yêu cầu:** Theo lời khai, nạn nhân đang nợ một khoản tiền lớn. Hãy xác định chính xác số tiền mà nạn nhân đang nợ.
 
 Tiến hành kiểm tra dữ liệu tin nhắn SMS của nạn nhân được lưu trữ trong cơ sở dữ liệu `mmssms.db`. Bằng cách đọc nội dung các tin nhắn đến (Received), ta phát hiện một tin nhắn đe dọa đòi nợ được gửi vào ngày 20-09-2023. Tin nhắn này ghi rõ số tiền nạn nhân cần phải chuẩn bị trả là 250,000 EGP
-![Pasted image 20260908221625.png](./images/Pasted%20image%2020260908221625.png)
+![The Crime Lab-1.png](./images/The%20Crime%20Lab-1.png)
 
 >250000
 
@@ -33,10 +33,10 @@ Tiến hành kiểm tra dữ liệu tin nhắn SMS của nạn nhân được l�
 **Yêu cầu:** Xác định tên của người chủ nợ.
 
 Từ tin nhắn đòi nợ ở câu hỏi trước, ta thu thập được số điện thoại của người gửi là `+201172137258`. 
-![Pasted image 20260908221523.png](./images/Pasted%20image%2020260908221523.png)
+![The Crime Lab-2.png](./images/The%20Crime%20Lab-2.png)
 
 Để biết số điện thoại này thuộc về ai, ta thực hiện đối chiếu chéo (cross-reference) với cơ sở dữ liệu danh bạ `contacts2.db` của điện thoại. Kết quả tra cứu số điện thoại này trong danh bạ hiển thị tên người dùng (Display Name) tương ứng là Shady Wahab
-![Pasted image 20260908221547.png](./images/Pasted%20image%2020260908221547.png)
+![The Crime Lab-3.png](./images/The%20Crime%20Lab-3.png)
 
 >Shady Wahab
 
@@ -45,13 +45,13 @@ Từ tin nhắn đòi nợ ở câu hỏi trước, ta thu thập được số 
 **Yêu cầu:** Nạn nhân đã rời khỏi nhà vào ngày 20/09/2023. Xác định vị trí của nạn nhân vào thời điểm đó.
 
 Kiểm tra lịch sử hoạt động (Recent Activity) của nạn nhân trong ngày 20/09/2023. Dữ liệu cho thấy vào lúc 23:50, nạn nhân có sử dụng hai ứng dụng là Discord và Google Maps
-![Pasted image 20260908224349.png](./images/Pasted%20image%2020260908224349.png)
+![The Crime Lab-4.png](./images/The%20Crime%20Lab-4.png)
 
 Dựa vào manh mối này, ta trích xuất các tệp tin ảnh chụp màn hình (snapshots) được hệ thống lưu lại tự động khi người dùng chuyển đổi ứng dụng
-![Pasted image 20260908224423.png](./images/Pasted%20image%2020260908224423.png)
+![The Crime Lab-5.png](./images/The%20Crime%20Lab-5.png)
 
 Trong thư mục snapshots, ta tìm thấy một ảnh chụp màn hình giao diện Google Maps hiển thị vị trí hiện tại của nạn nhân (dấu chấm xanh) đang đứng tại khách sạn The Nile Ritz-Carlton, Cairo
-![Pasted image 20260908223303.png](./images/Pasted%20image%2020260908223303.png)
+![The Crime Lab-6.png](./images/The%20Crime%20Lab-6.png)
 
 
 >The Nile Ritz-Carlton
@@ -61,10 +61,10 @@ Trong thư mục snapshots, ta tìm thấy một ảnh chụp màn hình giao di
 **Yêu cầu:** Lễ tân khách sạn cho biết nạn nhân có một chuyến bay sau 10 ngày lưu trú. Tìm điểm đến dự định của nạn nhân dựa trên thông tin vé máy bay được lưu trong điện thoại.
 
 Phân tích bộ nhớ cache của ứng dụng Google Photos (`disk_cache`), ta khôi phục được một số hình ảnh mà nạn nhân đã xem hoặc lưu trữ, trong đó có hình ảnh của một chiếc vé máy bay (boarding pass)
-![Pasted image 20260908223818.png](./images/Pasted%20image%2020260908223818.png)
+![The Crime Lab-7.png](./images/The%20Crime%20Lab-7.png)
 
 Trích xuất hình ảnh vé máy bay này và phóng to để đọc các chi tiết, ta thấy thông tin hành khách là MOHAMED AHMED, bay từ Cairo (Ai Cập) và điểm đến (To) là Las Vegas
-![Pasted image 20260908223527.png](./images/Pasted%20image%2020260908223527.png)
+![The Crime Lab-8.png](./images/The%20Crime%20Lab-8.png)
 
 >Las Vegas
 
@@ -73,6 +73,6 @@ Trích xuất hình ảnh vé máy bay này và phóng to để đọc các chi 
 **Yêu cầu:** Qua việc kiểm tra các đoạn hội thoại Discord, xác định địa điểm mà nạn nhân đã hẹn gặp một người bạn.
 
 Từ manh mối ở Q4, chúng ta biết nạn nhân đã sử dụng ứng dụng Discord cùng lúc với Google Maps. Bằng cách phân tích các tin nhắn Discord được lưu trong bộ nhớ đệm (Discord - Cached Messages), ta tìm thấy đoạn hội thoại lịch sử chứa thông tin trao đổi giữa nạn nhân và người bạn. Nội dung tin nhắn đề cập rõ ràng đến địa điểm mà nạn nhân muốn đến và hẹn gặp mặt
-![Pasted image 20260908223902.png](./images/Pasted%20image%2020260908223902.png)
+![The Crime Lab-9.png](./images/The%20Crime%20Lab-9.png)
 
 >The Mob Museum

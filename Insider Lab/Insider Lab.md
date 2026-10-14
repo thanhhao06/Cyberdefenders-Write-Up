@@ -18,7 +18,7 @@ Bạn đã thu được ảnh đĩa và phát hiện Karen sử dụng hệ đi�
 
 Bắt đầu bằng việc kiểm tra thư mục hệ thống quan trọng là `/boot`. Thư mục này thường chứa các tập tin cần thiết để khởi động hệ điều hành, bao gồm kernel và cấu hình bootloader. Phân tích các file cấu hình và kernel image trong `/boot`, chúng ta phát hiện hậu tố `-kali1-amd64` được đính kèm trong tên của chúng. Dấu hiệu này chỉ ra rõ ràng rằng hệ điều hành là một bản phân phối của Kali Linux
 
-![Pasted image 20260908182918.png](./images/Pasted%20image%2020260908182918.png)
+![Insider Lab.png](./images/Insider%20Lab.png)
 
 >kali
 
@@ -27,10 +27,10 @@ Bắt đầu bằng việc kiểm tra thư mục hệ thống quan trọng là `
 **Yêu cầu:** Tính giá trị mã băm MD5 của tập tin `access.log` của dịch vụ Apache.
 
 Trước tiên, cần xác định vị trí của file log. Theo cấu trúc thư mục mặc định của các hệ thống dựa trên Debian/Ubuntu (như Kali), file log của Apache2 thường nằm tại `/var/log/apache2/`. Truy cập vào đường dẫn này, chúng ta tìm thấy file `access.log`. Điểm đáng chú ý là kích thước của file này là 0 bytes (file rỗng)
-![Pasted image 20260908183245.png](./images/Pasted%20image%2020260908183245.png)
+![Insider Lab-1.png](./images/Insider%20Lab-1.png)
 
 Vì đề bài yêu cầu cụ thể giá trị hash của file này, chúng ta tiến hành tính toán MD5. Do file hoàn toàn trống, mã băm thu được chính là MD5 Null Hash tiêu chuẩn
-![Pasted image 20260908183328.png](./images/Pasted%20image%2020260908183328.png)
+![Insider Lab-2.png](./images/Insider%20Lab-2.png)
 
 >d41d8cd98f00b204e9800998ecf8427e
 
@@ -39,7 +39,7 @@ Vì đề bài yêu cầu cụ thể giá trị hash của file này, chúng ta 
 **Yêu cầu:** Tìm tên của công cụ đánh cắp thông tin đăng nhập (credential dumping tool) bị nghi ngờ đã được tải xuống máy.
 
 Để tìm kiếm các tập tin được người dùng tải về, chúng ta kiểm tra thư mục `/root/Downloads`. Tại đây, một tập tin nén định dạng ZIP đáng ngờ xuất hiện. Tên của file này chỉ đích danh "Mimikatz", một trong những công cụ phổ biến và khét tiếng nhất được dùng để trích xuất mật khẩu dạng plaintext, mã băm (hash), mã PIN và vé Kerberos từ bộ nhớ của Windows
-![Pasted image 20260908201112.png](./images/Pasted%20image%2020260908201112.png)
+![Insider Lab-3.png](./images/Insider%20Lab-3.png)
 
 >mimikatz_trunk.zip
 
@@ -48,7 +48,7 @@ Vì đề bài yêu cầu cụ thể giá trị hash của file này, chúng ta 
 **Yêu cầu:** Xác định đường dẫn tuyệt đối (absolute path) của một tập tin "siêu bí mật" (super-secret file) đã được tạo ra.
 
 Để theo dõi các hành động của người dùng, phân tích lịch sử dòng lệnh (bash history) là một phương pháp hiệu quả. Bằng cách kiểm tra file `.bash_history` của user `root`, chúng ta phát hiện một chuỗi các lệnh đáng ngờ. Cụ thể, người dùng đã thực hiện điều hướng thư mục và sử dụng các lệnh như `touch` và `cat` kết hợp với toán tử chuyển hướng (redirection `>`) để tạo và ghi dữ liệu vào một file mới. Lệnh này đã ghi rõ đường dẫn tuyệt đối đến file "SuperSecretFile.txt"
-![Pasted image 20260908202530.png](./images/Pasted%20image%2020260908202530.png)
+![Insider Lab-4.png](./images/Insider%20Lab-4.png)
 
 >/root/Desktop/SuperSecretFile.txt
 
@@ -57,7 +57,7 @@ Vì đề bài yêu cầu cụ thể giá trị hash của file này, chúng ta 
 **Yêu cầu:** Cho biết chương trình nào đã sử dụng file ảnh `didyouthinkwedmakeiteasy.jpg` trong quá trình thực thi.
 
 Tiếp tục khai thác thông tin từ file `.bash_history` đã được mở ở câu hỏi trước. Phân tích các dòng lệnh tiếp theo, chúng ta nhận thấy file hình ảnh có tên `didyouthinkwedmakeiteasy.jpg` được truyền vào như một đối số (argument) cho một lệnh cụ thể. Công cụ được gọi đến là một phần mềm phân tích mã nhị phân tĩnh (firmware analysis tool) thường được dùng để trích xuất file ẩn hoặc mã nhúng bên trong các tập tin khác (kỹ thuật Steganography)
-![Pasted image 20260908202610.png](./images/Pasted%20image%2020260908202610.png)
+![Insider Lab-5.png](./images/Insider%20Lab-5.png)
 
 >binwalk
 
@@ -66,7 +66,7 @@ Tiếp tục khai thác thông tin từ file `.bash_history` đã được mở 
 **Yêu cầu:** Xác định mục tiêu thứ ba trong danh sách kiểm tra (checklist) do Karen tạo.
 
 Kiểm tra nội dung của thư mục `/root/Desktop`, ta phát hiện một tập tin văn bản thuần túy (plaintext) có tên `Checklist`. Khi đọc nội dung của file này, nó hiển thị một danh sách gồm 3 mục tiêu. Theo thứ tự từ trên xuống, mục tiêu ở dòng thứ ba chính là câu trả lời
-![Pasted image 20260908202716.png](./images/Pasted%20image%2020260908202716.png)
+![Insider Lab-6.png](./images/Insider%20Lab-6.png)
 
 >profit
 
@@ -75,7 +75,7 @@ Kiểm tra nội dung của thư mục `/root/Desktop`, ta phát hiện một t�
 **Yêu cầu:** Dịch vụ web Apache đã được chạy bao nhiêu lần?
 
 Quay trở lại thư mục log của Apache tại `/var/log/apache2/` mà chúng ta đã phân tích ở Q2. Tại đây có chứa các file log tiêu chuẩn như `access.log`, `error.log`, và `other_vhosts_access.log`. Nếu dịch vụ Apache đã từng được khởi động và xử lý bất kỳ request nào, hoặc gặp lỗi trong quá trình chạy, các file này sẽ ghi nhận dữ liệu. Tuy nhiên, quan sát kích thước của cả 3 file này cho thấy tất cả đều có kích thước là 0 KB. Điều này cung cấp bằng chứng chắc chắn rằng dịch vụ Apache chưa từng được khởi chạy trên hệ thống này kể từ khi cài đặ
-![Pasted image 20260908203749.png](./images/Pasted%20image%2020260908203749.png)
+![Insider Lab-7.png](./images/Insider%20Lab-7.png)
 
 >0
 
@@ -84,7 +84,7 @@ Quay trở lại thư mục log của Apache tại `/var/log/apache2/` mà chún
 **Yêu cầu:** Xác định file chứa bằng chứng cho thấy máy tính này đã được dùng để tấn công một máy tính khác.
 
 Rà soát lại thư mục home của user `root` (`/root`), chúng ta tìm thấy một tập tin hình ảnh có tên `irZLAohL.jpeg`. Khi mở bức ảnh này, nó hiển thị ảnh chụp màn hình (screenshot) của một phiên làm việc trên hệ điều hành Windows. Màn hình Command Prompt đang thực thi một công cụ có tên `aylmao.exe`, được sử dụng để mô phỏng và tạo lưu lượng mạng độc hại (network flight simulator). Ảnh chụp màn hình này đóng vai trò như một bằng chứng (Artifact) cho thấy máy chủ Linux của Karen đã tham gia vào quá trình kiểm soát hoặc tấn công máy mục tiêu chạy Windows đó
-![Pasted image 20260908203717.png](./images/Pasted%20image%2020260908203717.png)
+![Insider Lab-8.png](./images/Insider%20Lab-8.png)
 
 >irZLAohL.jpeg
 ## Q9: It is believed that Karen was taunting a fellow computer expert through a bash script within the Documents directory. Who was the expert that Karen was taunting?
@@ -92,7 +92,7 @@ Rà soát lại thư mục home của user `root` (`/root`), chúng ta tìm th�
 **Yêu cầu:** Xác định tên vị chuyên gia máy tính mà Karen đã chế nhạo thông qua một bash script trong thư mục Documents.
 
 Để giải quyết câu hỏi này, ta cần xem lại file bash script trong thư mục Documents. Kiểm tra nội dung của file `firstscript_fixed`, ta thấy có các lệnh echo in ra màn hình. Dòng cuối cùng in ra: "Heck yeah! I can write bash too Young". Phân tích kỹ nội dung này sẽ tiết lộ danh tính của chuyên gia đang bị nhắm đến.
-![Pasted image 20260908204104.png](./images/Pasted%20image%2020260908204104.png)
+![Insider Lab-9.png](./images/Insider%20Lab-9.png)
 
 >Young
 
@@ -101,7 +101,7 @@ Rà soát lại thư mục home của user `root` (`/root`), chúng ta tìm th�
 **Yêu cầu:** Xác định user nào đã nhiều lần thực thi lệnh `su` để chiếm quyền root vào lúc 11:26.
 
 Mọi nỗ lực xác thực (authentication), bao gồm cả việc chuyển đổi người dùng bằng lệnh `su` (substitute user), đều được hệ thống ghi nhận (log). Trên các hệ thống Debian/Ubuntu, file log đảm nhiệm chức năng này là `/var/log/auth.log`. Mở file này và tìm kiếm các sự kiện xảy ra vào mốc thời gian 11:26. Các bản ghi log cho thấy một tài khoản dịch vụ cụ thể đã thực hiện nhiều nỗ lực leo thang đặc quyền
-![Pasted image 20260908210107.png](./images/Pasted%20image%2020260908210107.png)
+![Insider Lab-10.png](./images/Insider%20Lab-10.png)
 
 >postgres
 
@@ -109,6 +109,6 @@ Mọi nỗ lực xác thực (authentication), bao gồm cả việc chuyển đ
 
 **Yêu cầu:** Dựa trên lịch sử bash (bash history), thư mục làm việc hiện tại (current working directory) là gì?
 
-Kiểm tra lại nội dung của file `.bash_history` để theo dõi các lệnh điều hướng thư mục (`cd`). Lệnh `cd` cuối cùng được ghi lại trong lịch sử là thao tác chuyển đến thư mục `../Documents/myfirsthack/`. Để xác nhận việc điều hướng này thành công và đây thực sự là thư mục làm việc hiện hành (CWD), ta kiểm tra các lệnh được thực thi ngay sau đó. Sau lệnh `cd`, người dùng đã sử dụng lệnh `echo` và `touch` để tạo tập tin `bob.txt`. Việc tập tin `bob.txt` tồn tại bên trong `/root/Documents/myfirsthack/` chứng tỏ lệnh `cd` cuối cùng đã thành công và xác định chính xác vị trí thư mục hiện tại![Pasted image 20260908204635.png](./images/Pasted%20image%2020260908204635.png)
+Kiểm tra lại nội dung của file `.bash_history` để theo dõi các lệnh điều hướng thư mục (`cd`). Lệnh `cd` cuối cùng được ghi lại trong lịch sử là thao tác chuyển đến thư mục `../Documents/myfirsthack/`. Để xác nhận việc điều hướng này thành công và đây thực sự là thư mục làm việc hiện hành (CWD), ta kiểm tra các lệnh được thực thi ngay sau đó. Sau lệnh `cd`, người dùng đã sử dụng lệnh `echo` và `touch` để tạo tập tin `bob.txt`. Việc tập tin `bob.txt` tồn tại bên trong `/root/Documents/myfirsthack/` chứng tỏ lệnh `cd` cuối cùng đã thành công và xác định chính xác vị trí thư mục hiện tại![Insider Lab-11.png](./images/Insider%20Lab-11.png)
 
 >/root/Documents/myfirsthack/

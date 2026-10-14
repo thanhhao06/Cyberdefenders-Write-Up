@@ -17,7 +17,7 @@ Karen is a security professional looking for a new job. A company called "TAAUSA
 Trong quá trình điều tra một bản disk image Windows, việc xác định tài khoản quản trị chính giúp định vị đúng thư mục profile để thu thập các artifact người dùng
 
 Kiểm tra thư mục `[root]\Users` trên ảnh đĩa bằng FTK Imager. Bên cạnh các tài khoản hệ thống mặc định (`Default`, `Public`), tài khoản người dùng thực tế và là quản trị viên hệ thống là `Karen`
-![Pasted image 20260930200106.png](./images/Pasted%20image%2020260930200106.png)
+![HireMe Lab.png](./images/HireMe%20Lab.png)
 
 >Karen
 
@@ -31,7 +31,7 @@ SOFTWARE\Microsoft\Windows NT\CurrentVersion
 ```
 
 Tại đây, trường `CurrentBuild` hoặc `CurrentBuildNumber` lưu số hiệu bản dựng của Windows 10 (bản 1709 - Fall Creators Update) là `16299`
-![Pasted image 20260930185001.png](./images/Pasted%20image%2020260930185001.png)
+![HireMe Lab-1.png](./images/HireMe%20Lab-1.png)
 
 >16299
 
@@ -45,7 +45,7 @@ SYSTEM\ControlSet001\Control\ComputerName\ComputerName
 ```
 
 Đọc giá trị chuỗi tại `ComputerName`, hostname của máy là `TOTALLYNOTAHACK`
-![Pasted image 20260930185327.png](./images/Pasted%20image%2020260930185327.png)
+![HireMe Lab-2.png](./images/HireMe%20Lab-2.png)
 
 >TOTALLYNOTAHACK
 
@@ -56,7 +56,7 @@ SYSTEM\ControlSet001\Control\ComputerName\ComputerName
 Kiểm tra các ứng dụng bên thứ ba được cài đặt và các tệp trao đổi trong hộp thư của Karen. Trong hòm thư có tệp đính kèm `Skype Convo.zip`, đồng thời trên phân vùng ổ đĩa phát hiện bộ cài đặt `Skype-8.41.0.54.exe`
 
 Điều này xác nhận ứng dụng nhắn tin được sử dụng là Skype
-![Pasted image 20260930200028.png](./images/Pasted%20image%2020260930200028.png)
+![HireMe Lab-3.png](./images/HireMe%20Lab-3.png)
 
 >Skype
 
@@ -70,7 +70,7 @@ AppData\Local\Google\Chrome\User Data\Default\Web Data
 ```
 
 Trích xuất tệp này và mở bằng DB Browser for SQLite, truy vấn các trường địa chỉ autofill của người dùng Karen, xác định mã zip code được lưu lại là `19709`
-![Pasted image 20260930190410.png](./images/Pasted%20image%2020260930190410.png)
+![HireMe Lab-4.png](./images/HireMe%20Lab-4.png)
 
 >19709
 
@@ -87,7 +87,7 @@ The Alpaca Association of USA International (TAAUSAI)
 ```
 
 Hai chữ cái viết tắt là `MS`
-![Pasted image 20260930200006.png](./images/Pasted%20image%2020260930200006.png)
+![HireMe Lab-5.png](./images/HireMe%20Lab-5.png)
 
 >MS
 
@@ -101,7 +101,7 @@ Hai chữ cái viết tắt là `MS`
 ```
 
 Karen cũng nhắc lại con số `$150,000` trong email phản hồi. Số tiền trả trước là `150000`
-![Pasted image 20260930195807.png](./images/Pasted%20image%2020260930195807.png)
+![HireMe Lab-6.png](./images/HireMe%20Lab-6.png)
 
 >150000
 
@@ -115,8 +115,8 @@ Meet us here "27°22'50.10"N, 33°37'54.62"E"
 ```
 
 Tra cứu tọa độ này trên bản đồ, vị trí tương ứng thuộc bờ biển El Gouna của Ai Cập (`Egypt`)
-![Pasted image 20260930195904.png](./images/Pasted%20image%2020260930195904.png)
-![Pasted image 20260930195708.png](./images/Pasted%20image%2020260930195708.png)
+![HireMe Lab-7.png](./images/HireMe%20Lab-7.png)
+![HireMe Lab-8.png](./images/HireMe%20Lab-8.png)
 
 >Egypt
 
@@ -130,7 +130,7 @@ SYSTEM\ControlSet001\Control\TimeZoneInformation
 ```
 
 Kiểm tra giá trị `TimeZoneKeyName`, múi giờ được thiết lập là `UTC`
-![Pasted image 20260930195638.png](./images/Pasted%20image%2020260930195638.png)
+![HireMe Lab-9.png](./images/HireMe%20Lab-9.png)
 
 >UTC
 
@@ -146,7 +146,7 @@ Tìm tệp `AlpacaCare.docx`, cột `Date Accessed` ghi nhận
 ```
 
 Quy đổi sang định dạng `YYYY-MM-DD HH:MM` là `2019-03-17 21:52`
-![Pasted image 20260930195551.png](./images/Pasted%20image%2020260930195551.png)
+![HireMe Lab-10.png](./images/HireMe%20Lab-10.png)
 
 >2019-03-17 21:52
 
@@ -157,7 +157,7 @@ Quy đổi sang định dạng `YYYY-MM-DD HH:MM` là `2019-03-17 21:52`
 Khi người dùng mở tệp từ các phân vùng hoặc ổ đĩa khác, Microsoft Office và Windows sẽ tạo tệp shortcut (.LNK) trong thư mục Recent
 
 Duyệt vào `[root]\Users\Karen\AppData\Roaming\Microsoft\Office\Recent`, phát hiện tệp shortcut có tên `PacaLady (A).LNK`. Ký tự `(A)` chỉ ra phân vùng `PacaLady` được gán ký tự ổ đĩa là `A`
-![Pasted image 20260930195431.png](./images/Pasted%20image%2020260930195431.png)
+![HireMe Lab-11.png](./images/HireMe%20Lab-11.png)
 
 >A
 
@@ -174,8 +174,8 @@ Karen đã giải mã chuỗi này và trả lời qua email vào ngày 17/03/20
 ```text
 "The answer is TheCardCriesNoMore"
 ```
-![Pasted image 20260930195326.png](./images/Pasted%20image%2020260930195326.png)
-![Pasted image 20260930195347.png](./images/Pasted%20image%2020260930195347.png)
+![HireMe Lab-12.png](./images/HireMe%20Lab-12.png)
+![HireMe Lab-13.png](./images/HireMe%20Lab-13.png)
 
 >TheCardCriesNoMore
 
@@ -189,7 +189,7 @@ Trong email xác nhận kết quả bài test gửi ngày 22/03/2019 (`Re: Inter
 ```
 
 Tên vị trí công việc gồm 3 từ là `Cyber Security Analyst`
-![Pasted image 20260930195243.png](./images/Pasted%20image%2020260930195243.png)
+![HireMe Lab-14.png](./images/HireMe%20Lab-14.png)
 
 >Cyber Security Analyst
 
@@ -205,7 +205,7 @@ Mở hive `SAM` tại `SAM\Domains\Account\Users\000003E9`, trường này hiể
 ```
 
 Định dạng lại là `03/21/2019 19:13:09`
-![Pasted image 20260930195153.png](./images/Pasted%20image%2020260930195153.png)
+![HireMe Lab-15.png](./images/HireMe%20Lab-15.png)
 
 >03/21/2019 19:13:09
 
@@ -219,7 +219,7 @@ AppData\Local\Google\Chrome\User Data\Last Version
 ```
 
 Mở tệp này để đọc chuỗi phiên bản chính xác là `72.0.3626.121`
-![Pasted image 20260930194954.png](./images/Pasted%20image%2020260930194954.png)
+![HireMe Lab-16.png](./images/HireMe%20Lab-16.png)
 
 >72.0.3626.121
 
@@ -233,7 +233,7 @@ Mở `History` trong DB Browser for SQLite, truy vấn bảng `downloads_url_cha
 ```text
 https://download.skype.com/s4l/download/win/Skype-8.41.0.54.exe
 ```
-![Pasted image 20260930195038.png](./images/Pasted%20image%2020260930195038.png)
+![HireMe Lab-17.png](./images/HireMe%20Lab-17.png)
 
 >https://download.skype.com/s4l/download/win/Skype-8.41.0.54.exe
 
@@ -252,7 +252,7 @@ http://palominoalpacafarm.com/?page_id=24
 ```
 
 Tên miền trang web là `palominoalpacafarm.com`
-![Pasted image 20260930194812.png](./images/Pasted%20image%2020260930194812.png)
-![Pasted image 20260930194825.png](./images/Pasted%20image%2020260930194825.png)
+![HireMe Lab-18.png](./images/HireMe%20Lab-18.png)
+![HireMe Lab-19.png](./images/HireMe%20Lab-19.png)
 
 >palominoalpacafarm.com

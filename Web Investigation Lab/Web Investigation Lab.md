@@ -22,10 +22,10 @@ Statistics → Conversations → IPv4
 ```
 
 Tại đây có thể quan sát các cặp IP trao đổi lưu lượng với nhau. Cặp `111.224.250.131` và `73.124.22.98` có lượng traffic vượt trội so với các conversation còn lại
-![Pasted image 20260816120840.png](./images/Pasted%20image%2020260816120840.png)
+![Web Investigation Lab-1.png](./images/Web%20Investigation%20Lab-1.png)
 
 Tuy nhiên, chỉ có nhiều packet nhất chưa đủ để kết luận một IP là attacker. Khi kiểm tra các HTTP request sau đó, có thể thấy `111.224.250.131` là phía chủ động gửi các request chứa SQL Injection tới web server `73.124.22.98`, trong khi server gửi HTTP response ngược lại.
-![Pasted image 20260816144639.png](./images/Pasted%20image%2020260816144639.png)
+![Web Investigation Lab-2.png](./images/Web%20Investigation%20Lab-2.png)
 
 >111.224.250.131
 
@@ -43,7 +43,7 @@ Trong kết quả WHOIS/APNIC, phần contact information hiển thị địa ch
 No.69 Kunlun avenue, Shijiazhuang 050000 China
 ```
 
-![Pasted image 20260816120843.png](./images/Pasted%20image%2020260816120843.png)
+![Web Investigation Lab-3.png](./images/Web%20Investigation%20Lab-3.png)
 
 >Shijiazhuang
 
@@ -68,7 +68,7 @@ search=book'
 UNION SELECT ...
 ```
 
-![Pasted image 20260816120847.png](./images/Pasted%20image%2020260816120847.png)
+![Web Investigation Lab-4.png](./images/Web%20Investigation%20Lab-4.png)
 
 Như vậy không chỉ vì `search.php` xuất hiện nhiều lần, mà chính parameter của script này đang được attacker chèn SQL payload để thao tác database
 
@@ -85,7 +85,7 @@ Một trong những SQL Injection probe đầu tiên được gửi tới server
 GET /search.php?search=book and 1=1; -- - HTTP/1.1
 ```
 
-![Pasted image 20260816120850.png](./images/Pasted%20image%2020260816120850.png)
+![Web Investigation Lab-5.png](./images/Web%20Investigation%20Lab-5.png)
 
 Payload:
 ```
@@ -119,7 +119,7 @@ và payload truy vấn:
 FROM INFORMATION_SCHEMA.SCHEMATA
 ```
 
-![Pasted image 20260816120854.png](./images/Pasted%20image%2020260816120854.png)
+![Web Investigation Lab-6.png](./images/Web%20Investigation%20Lab-6.png)
 
 `INFORMATION_SCHEMA.SCHEMATA` chứa metadata về các schema/database mà database server biết tới. Vì vậy query này được sử dụng để enumerate danh sách database
 
@@ -137,12 +137,12 @@ WHERE table_name=0x637573746f6d657273
 AND table_schema=0x626f6f6b776f726c645f6462
 ```
 
-![Pasted image 20260816120858.png](./images/Pasted%20image%2020260816120858.png)
+![Web Investigation Lab-7.png](./images/Web%20Investigation%20Lab-7.png)
 
 Hai giá trị này đang được biểu diễn dưới dạng hexadecimal.
 
 Decode bằng CyberChef với recipe **From Hex**
-![Pasted image 20260816120903.png](./images/Pasted%20image%2020260816120903.png)
+![Web Investigation Lab-8.png](./images/Web%20Investigation%20Lab-8.png)
 
 Kết quả:
 ```
@@ -187,7 +187,7 @@ và sau đó:
 /admin/index.php
 ```
 
-![Pasted image 20260816120910.png](./images/Pasted%20image%2020260816120910.png)
+![Web Investigation Lab-9.png](./images/Web%20Investigation%20Lab-9.png)
 >/admin/
 
 ## Q8: Knowing which credentials were used allows us to determine the extent of account compromise. What are the credentials used by the attacker for logging in?
@@ -211,7 +211,7 @@ username = admin
 password = admin123!
 ```
 
-![Pasted image 20260816120914.png](./images/Pasted%20image%2020260816120914.png)
+![Web Investigation Lab-10.png](./images/Web%20Investigation%20Lab-10.png)
 
 Sau chuỗi login activity này, attacker tiếp tục tương tác với `/admin/index.php`, cho thấy administrative access đã được sử dụng trong giai đoạn tiếp theo của cuộc tấn công.
 
@@ -237,7 +237,7 @@ Khi follow HTTP stream, trong trường `Content-Disposition` có:
 name="fileToUpload"; filename="NVri2vhp.php"
 ```
 
-![Pasted image 20260816120929.png](./images/Pasted%20image%2020260816120929.png)
+![Web Investigation Lab-11.png](./images/Web%20Investigation%20Lab-11.png)
 
 Nội dung file cũng cho thấy đây không phải file PHP thông thường:
 ```

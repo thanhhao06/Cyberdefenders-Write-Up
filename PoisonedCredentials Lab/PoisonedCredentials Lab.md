@@ -22,7 +22,7 @@ ip.src == 192.168.232.162
 ```
 
 Kiểm tra các gói tin truy vấn phân giải tên broadcast và multicast. Tại gói tin số 47 (NBNS), gói 48, 49 (MDNS) cùng gói 52, 53 (LLMNR), hệ thống liên tục gửi các truy vấn tìm kiếm hostname bị gõ sai là `fileshaare` thay vì `fileshare`
-![Pasted image 20261002232020.png](./images/Pasted%20image%2020261002232020.png)
+![PoisonedCredentials Lab.png](./images/PoisonedCredentials%20Lab.png)
 
 >fileshaare
 
@@ -38,7 +38,7 @@ nbns
 ```
 
 Ngay sau truy vấn tìm kiếm `FILESHAARE<20>` của nạn nhân ở gói 47, tại gói tin số 51 xuất hiện phản hồi `Name query response` với cờ Authoritative khẳng định hostname `FILESHAARE<20>` tương ứng với địa chỉ IP `192.168.232.215`
-![Pasted image 20261002232930.png](./images/Pasted%20image%2020261002232930.png)
+![PoisonedCredentials Lab-1.png](./images/PoisonedCredentials%20Lab-1.png)
 
 >192.168.232.215
 
@@ -54,7 +54,7 @@ nbns.addr == 192.168.232.215
 ```
 
 Bên cạnh nạn nhân đầu tiên là `192.168.232.162` ở gói tin số 51, từ gói tin số 145 trở đi xuất hiện hàng loạt gói `Name query response` được máy rogue gửi tới địa chỉ đích `192.168.232.176` để đầu độc các truy vấn CYBERCACTUS và PRINETR
-![Pasted image 20261002233028.png](./images/Pasted%20image%2020261002233028.png)
+![PoisonedCredentials Lab-2.png](./images/PoisonedCredentials%20Lab-2.png)
 
 >192.168.232.176
 
@@ -70,7 +70,7 @@ smb2
 ```
 
 Kiểm tra gói tin số 242 ứng với lệnh `Session Setup Request, NTLMSSP_AUTH`. Trong phần chi tiết `SMB2 Header`, trường `Session Id` hiển thị tài khoản thực hiện xác thực là `Acct: janesmith` thuộc domain `cybercactus.local`
-![Pasted image 20261002233608.png](./images/Pasted%20image%2020261002233608.png)
+![PoisonedCredentials Lab-3.png](./images/PoisonedCredentials%20Lab-3.png)
 
 >janesmith
 
@@ -86,6 +86,6 @@ ip.dst == 192.168.232.215 && smb2
 ```
 
 Quan sát gói tin số 241, mở rộng trường `NTLM Secure Service Provider -> Target Info`. Thuộc tính `Attribute: NetBIOS computer name` ghi nhận rõ tên máy tính là `AccountingPC`
-![Pasted image 20261002234635.png](./images/Pasted%20image%2020261002234635.png)
+![PoisonedCredentials Lab-4.png](./images/PoisonedCredentials%20Lab-4.png)
 
 >AccountingPC

@@ -17,7 +17,7 @@ The accountant at the company received an email titled "Urgent New Order" from a
 Đầu tiên, lấy hash của mẫu malware được cung cấp và tiến hành tra cứu trên **VirusTotal**.
 
 Trong tab **Details**, kéo xuống phần **History** để kiểm tra các timestamp liên quan đến mẫu.
-![Pasted image 20260816112050.png](./images/Pasted%20image%2020260816112050.png)
+![Oski Lab-1.png](./images/Oski%20Lab-1.png)
 
 Tại trường **Creation Time**, VirusTotal hiển thị:
 ```
@@ -35,7 +35,7 @@ Cần phân biệt `Creation Time` với `First Seen In The Wild`. Trong trườ
 Tiếp tục phân tích mẫu trên VirusTotal và chuyển sang tab **Relations**.
 
 Trong phần **Contacted URLs**, có thể thấy malware kết nối tới hai URL đáng chú ý.
-![Pasted image 20260816112054.png](./images/Pasted%20image%2020260816112054.png)
+![Oski Lab-2.png](./images/Oski%20Lab-2.png)
 
 URL đầu tiên là:
 ```
@@ -59,7 +59,7 @@ Ngoài C2 endpoint ở câu trước, VirusTotal còn ghi nhận request tới:
 http://171.22.28.221/9e226a84ec50246d/sqlite3.dll
 ```
 
-![Pasted image 20260816112058.png](./images/Pasted%20image%2020260816112058.png)
+![Oski Lab-3.png](./images/Oski%20Lab-3.png)
 
 Từ URL có thể xác định library được malware tải xuống là:
 ```
@@ -82,7 +82,7 @@ Malware configuration
 ```
 
 Sandbox nhận diện configuration thuộc malware family **Stealc** và hiển thị trực tiếp phần encryption key.
-![Pasted image 20260816112102.png](./images/Pasted%20image%2020260816112102.png)
+![Oski Lab-4.png](./images/Oski%20Lab-4.png)
 
 Trong mục **Keys → RC4**, giá trị được xác định là:
 ```
@@ -104,7 +104,7 @@ Trong ANY.RUN, chuyển sang phần **ATT&CK** và quan sát tactic:
 Credential Access
 ```
 
-![Pasted image 20260816112106.png](./images/Pasted%20image%2020260816112106.png)
+![Oski Lab-5.png](./images/Oski%20Lab-5.png)
 
 Một trong những hành vi nổi bật là:
 ```
@@ -142,7 +142,7 @@ C:\ProgramData\*.dll
 Điều này cho thấy malware không chỉ xóa một DLL cụ thể mà nhắm tới **tất cả file có phần mở rộng** `**.dll**` **trong thư mục** `**C:\ProgramData**`.
 
 ANY.RUN extract trực tiếp chuỗi command có thao tác `del` đối với `C:\ProgramData\*.dll`.
-![Pasted image 20260816114430.png](./images/Pasted%20image%2020260816114430.png)
+![Oski Lab-6.png](./images/Oski%20Lab-6.png)
 
 Đây có thể được xem là một bước cleanup nhằm loại bỏ những dependency hoặc artifact được malware sử dụng trong quá trình thực thi
 
@@ -153,7 +153,7 @@ ANY.RUN extract trực tiếp chuỗi command có thao tác `del` đối với `
 **Yêu cầu:** Xác định thời gian delay trước khi malware tự xóa chính nó sau khi hoàn thành quá trình exfiltration.
 
 Tiếp tục phân tích command line được malware sử dụng ở giai đoạn cleanup.
-![Pasted image 20260816114520.png](./images/Pasted%20image%2020260816114520.png)
+![Oski Lab-7.png](./images/Oski%20Lab-7.png)
 
 ANY.RUN extract được command chứa:
 ```
@@ -168,7 +168,7 @@ del /f /q
 Điều này cho thấy malware tạo một khoảng delay trước khi thực hiện self-deletion.
 
 ANY.RUN xác nhận chuỗi self-delete của mẫu chứa `timeout /t 5` trước lệnh xóa file
-![Pasted image 20260816112116.png](./images/Pasted%20image%2020260816112116.png)
+![Oski Lab-8.png](./images/Oski%20Lab-8.png)
 
 Tham số:
 ```

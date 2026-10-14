@@ -19,7 +19,7 @@ An alert from the Intrusion Detection System (IDS) flagged suspicious lateral mo
 Statistics → Conversations → IPv4
 ```
 
-![Pasted image 20260816114626.png](./images/Pasted%20image%2020260816114626.png)
+![PsExec Hunt Lab-1.png](./images/PsExec%20Hunt%20Lab-1.png)
 
 Trong kết quả, địa chỉ:
 ```
@@ -53,7 +53,7 @@ Session Setup
 ```
 giữa `10.0.0.130` và `10.0.0.133`.
 
-![Pasted image 20260816114631.png](./images/Pasted%20image%2020260816114631.png)
+![PsExec Hunt Lab-2.png](./images/PsExec%20Hunt%20Lab-2.png)
 
 Trong SMB2 Session Setup Response, mở:
 ```
@@ -90,7 +90,7 @@ NTLMSSP_AUTH
 ```
 
 Wireshark hiển thị trực tiếp username được sử dụng cho quá trình authentication
-![Pasted image 20260816114635.png](./images/Pasted%20image%2020260816114635.png)
+![PsExec Hunt Lab-3.png](./images/PsExec%20Hunt%20Lab-3.png)
 
 Tại cột Info có thể thấy:
 ```
@@ -118,7 +118,7 @@ Trong các SMB file operation xuất hiện một file đáng chú ý:
 PSEXESVC.exe
 ```
 
-![Pasted image 20260816114643.png](./images/Pasted%20image%2020260816114643.png)
+![PsExec Hunt Lab-4.png](./images/PsExec%20Hunt%20Lab-4.png)
 
 Có thể quan sát chuỗi thao tác:
 ```
@@ -138,7 +138,7 @@ PsExec sử dụng một temporary Windows service trên máy đích để thự
 **Yêu cầu:** Xác định network share được PsExec sử dụng để đưa service executable lên máy mục tiêu.
 
 Quan sát các SMB2 **Tree Connect Request** xuất hiện ngay trước hoạt động tạo `PSEXESVC.exe`.
-![Pasted image 20260816114646.png](./images/Pasted%20image%2020260816114646.png)
+![PsExec Hunt Lab-5.png](./images/PsExec%20Hunt%20Lab-5.png)
 
 Có thể thấy máy `10.0.0.130` kết nối tới:
 ```
@@ -156,7 +156,7 @@ MITRE ATT&CK cũng ghi nhận PsExec có khả năng ghi chương trình vào `A
 **Yêu cầu:** Xác định network share được PsExec sử dụng cho hoạt động giao tiếp giữa hai máy.
 
 Quay lại các SMB2 Tree Connect Request trước khi attacker truy cập `ADMIN$`.
-![Pasted image 20260816114649.png](./images/Pasted%20image%2020260816114649.png)
+![PsExec Hunt Lab-6.png](./images/PsExec%20Hunt%20Lab-6.png)
 
 Có thể thấy một connection được thiết lập tới:
 ```
@@ -188,7 +188,7 @@ còn có lượng traffic đáng kể giữa:
 Điều này cho thấy attacker tiếp tục tương tác với một host nội bộ khác.
 
 Để xác định hostname tương ứng với `10.0.0.131`, filter các packet liên quan đến SMB/NetBIOS Browser traffic.
-![Pasted image 20260816114654.png](./images/Pasted%20image%2020260816114654.png)
+![PsExec Hunt Lab-7.png](./images/PsExec%20Hunt%20Lab-7.png)
 
 Trong các packet **Host Announcement**, Wireshark hiển thị hostname:
 ```
